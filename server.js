@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid')
 const db = './db/db.json'
-const PORT = 3001;
+const PORT = 80;
 const app = express();
 const dataRes = require("./db/db.json")
 
@@ -44,7 +44,7 @@ app.post('/api/notes', (req, res) => {
         fs.readFile(db, 'utf8', (err, data) => {
             if (err) {
                 console.log(err)
-            } 
+            }
             // write post to db.json
             else {
                 const parsedData = JSON.parse(data)
