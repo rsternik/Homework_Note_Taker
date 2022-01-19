@@ -6,6 +6,8 @@
 2. [Installation](#installation)
 3. [License](#test)
 4. [Github](#github)
+5. [URL](#URL)
+
 
 
 ## Description
@@ -18,4 +20,6 @@ Unlicensed.
 Checkout my github here  https://github.com/rsternik
 ## Contact
 If you have any questions please email me at rsternik.wg@gmail.com
+## URL
+https://rsternik.github.io/Homework_Note_Taker/
 
