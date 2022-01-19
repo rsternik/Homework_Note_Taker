@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid')
 const db = './db/db.json'
-const PORT = 80;
+const PORT = process.env.PORT || 80;
 const app = express();
 const dataRes = require("./db/db.json")
 
