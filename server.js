@@ -1,63 +1,18 @@
-// Required resources
+//Required files and Node modules 
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const { v4: uuidv4 } = require('uuid')
-const db = './db/db.json'
-const PORT = process.env.PORT || 80;
-const app = express();
-const dataRes = require("./db/db.json")
+const routes = require('./routes/routes.js')
 
-// Express app use
+//Access Port
+const PORT = process.env.PORT || 8080;
+
+//Express setup
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(routes);
 
-// default get route to index.html
-app.get('/', (req, res) =>
-    res.sendFile(path.join(__dirname, 'public/index.html'))
-);
-
-// route to notes page
-app.get('/notes', (req, res) =>
-    res.sendFile(path.join(__dirname, 'public/notes.html'))
-);
-
+// App listen on defined PORT
 app.listen(PORT, () =>
-    console.log(`Example app listening at http://localhost:${PORT}`)
+    console.log(`App listening at http://localhost:${PORT}`)
 );
-
-app.get('/api/notes', (req, res) => res.json(dataRes));
-// Post route 
-app.post('/api/notes', (req, res) => {
-    console.log(`${req.method} received for notes!}`)
-
-    const { title, text } = req.body
-    // condition if data is enter in post route
-    if (req.body) {
-        const newNote = {
-            title,
-            text,
-            id: uuidv4(),
-        }
-        // read db.json
-        fs.readFile(db, 'utf8', (err, data) => {
-            if (err) {
-                console.log(err)
-            }
-            // write post to db.json
-            else {
-                const parsedData = JSON.parse(data)
-                parsedData.push(newNote)
-                res.json(parsedData)
-                fs.writeFile(db, JSON.stringify(parsedData, null, 4), (err) =>
-                    err ? console.error(err) : console.log(`note written to ${db}`)
-                );
-            }
-
-        })
-    }
-})
-
-
-
